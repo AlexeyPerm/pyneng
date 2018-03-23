@@ -4,8 +4,8 @@
 
 from sys import argv 
 
-ip_address = argv[1:]
-ip_address = ip_address.split('/')
+ip_input = argv[1:]
+ip_address = str(ip_input).split('/')
 
 #Вводим IP. Разбиваем список на элементы слешем
 #ip_address = input('Введите IP-сети в формате: 10.1.1.0/24 :\n').split('/')
