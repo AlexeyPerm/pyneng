@@ -35,8 +35,8 @@ london_co = {
 device = london_co.get(input('Enter device name: '))  # Запросили ключ словаря через dict.get() и закинули его в device
 device_keys = ','.join(device)      # Разделяем каждый элемент строки запятыми, чтобы не было всяких кавычек и прочего
 
-# Методом setdefault() ищем ключ, если он есть, то заносим его значение в result, в противном случае
-# создаётся ключ со значением "такого параметра нет" и это значение попадает в result
-result = device.setdefault((input('Enter parameter name (' + device_keys + '):')), 'Такого параметра нет')
+# Методом get() запрашиваем ключ. Если он есть, то заносим его значение в result, в противном случае
+# возвращается не None, а значение "такого параметра нет" и это значение попадает в result
+result = device.get((input('Enter parameter name (' + device_keys + '):')), 'Такого параметра нет')
 
 print(result)
