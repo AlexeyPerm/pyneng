@@ -33,4 +33,5 @@ london_co = {
 }
 
 device = london_co.get(input('Enter device name: '))  # Запросили ключ словаря через dict.get() и закинули его в device
-print(device.get(input('Enter parameter name: ')))  # Запрос ключа словаря device и выдали итоговый результат
+result = device.get(input('Enter parameter name: '))  # Запрос ключа словаря device и запись его в result
+print(result)

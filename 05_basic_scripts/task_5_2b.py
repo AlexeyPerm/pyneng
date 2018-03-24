@@ -36,5 +36,6 @@ device = london_co.get(input('Enter device name: '))  # Запросили кл�
 device_keys = ','.join(device)      # Разделяем каждый элемент строки запятыми, чтобы не было всяких кавычек и прочего
 
 # device.get - запрос значения ключа словаря device. input() - показывает возможные ключи словаря
-print(device.get(input('Enter parameter name (' + device_keys + '):')))
+result = device.get(input('Enter parameter name (' + device_keys + '):'))
+print(result)
 
