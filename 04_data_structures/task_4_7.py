@@ -1,7 +1,5 @@
 #Преобразовать MAC-адрес в двоичную строку (без двоеточий).
 
-MAC = 'AAAA:BBBB:CCCC'
-
 """
 Это "построчный" разбор итогового результата
 #MAC = MAC.replace(':','')      удаляем двоеточия.   
@@ -9,9 +7,9 @@ MAC = 'AAAA:BBBB:CCCC'
 #MAC = bin(MAC)                 Переводим в bin
 #MAC = MAC[2:]                  Делаем срез, для удаления 0b в начале
 #print(MAC)
-
 """
 
+MAC = 'AAAA:BBBB:CCCC'
 
 print(bin(int(MAC.replace(':',''),16))[2:])
 
