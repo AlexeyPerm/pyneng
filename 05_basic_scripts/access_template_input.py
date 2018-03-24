@@ -1,4 +1,5 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3
+#!/usr/bin/env python3
 
 interface = input('Enter interface type and number: ')
 vlan = input('Enter VLAN number: ')
