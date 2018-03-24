@@ -4,8 +4,6 @@ from sys import argv
 
 ip_address = argv[1].split('/')   #взяли первый и единственный элемент
 
-#Вводим IP. Разбиваем список на элементы слешем
-#ip_address = input('Введите IP-сети в формате: 10.1.1.0/24 :\n').split('/')
 IP = ip_address[0].split('.')       #разделяем список на элементы
 prefix = ip_address[1]              #Взяли префикс
 
