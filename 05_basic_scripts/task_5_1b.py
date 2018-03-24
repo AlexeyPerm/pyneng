@@ -2,8 +2,7 @@
 
 from sys import argv
 
-ip_address = argv[1].split('/')
-#ip_address = str(ip_input).split('/')
+ip_address = argv[1].split('/')   #взяли первый и единственный элемент
 
 #Вводим IP. Разбиваем список на элементы слешем
 #ip_address = input('Введите IP-сети в формате: 10.1.1.0/24 :\n').split('/')
@@ -36,4 +35,3 @@ mask_octet1 = mask_octet1, mask_octet2 = mask_octet2, mask_octet3 = mask_octet3,
 mask_int1 = mask_int1, mask_int2 = mask_int2, mask_int3 = mask_int3, mask_int4 = mask_int4)
 
 print(network_template)
-
