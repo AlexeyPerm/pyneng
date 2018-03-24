@@ -38,6 +38,8 @@ Mask:
 {mask_octet1} {mask_octet2} {mask_octet3} {mask_octet4}
 """
 
+# Надо завязывать делать такие print() :)
+
 print(network_template.format(first = first, second = second, third = third, fourth = fourth, prefix = prefix,
 mask_octet1 = mask_octet1, mask_octet2 = mask_octet2, mask_octet3 = mask_octet3, mask_octet4 = mask_octet4,
 mask_int1 = mask_int1, mask_int2 = mask_int2, mask_int3 = mask_int3, mask_int4 = mask_int4))
