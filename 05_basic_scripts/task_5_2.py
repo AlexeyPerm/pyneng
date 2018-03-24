@@ -26,4 +26,4 @@ london_co = {
     }
 }
 
-print(london_co.get(input('Enter device name: ')))      #Запросили ключ словаря .get
+print(london_co.get(input('Enter device name: ')))      #Запросили ключ словаря dict.get()

@@ -3,3 +3,4 @@
 .idea/rustok.iml
 *.xml
 .idea/pyneng.iml
+*.iml
