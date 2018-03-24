@@ -2,7 +2,7 @@
 
 from sys import argv
 
-interface, vlan = argv[1:]  #срез списка. начинать со второго элемента списка. То есть с interface. 
+interface, vlan = argv[1:]  #срез списка. начинать со второго элемента списка. То есть с interface.
 
 access_template = ['switchport mode access',
 'switchport access vlan {}',
