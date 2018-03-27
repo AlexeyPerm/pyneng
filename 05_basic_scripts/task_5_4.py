@@ -12,12 +12,16 @@
 """
 
 num_list = [10, 2, 30, 100, 10, 50, 11, 30, 15, 7]
-word_list = ['python', 'ruby', 'perl', 'ruby', 'perl', 'python', 'ruby', 'perl']
-
+num_input = int((input('Введите число:')))
 num_reverse = num_list[::-1]
+num_result = len(num_list) - (num_reverse.index(num_input) + 1)
+
+print('Последнее вхождение числа: ', num_result)
+
+word_list = ['python', 'ruby', 'perl', 'ruby', 'perl', 'python', 'ruby', 'perl']
+word_input = str((input('Введите число:')))
 word_reverse = word_list[::-1]
+word_result = len(word_list) - (word_reverse.index(word_input) + 1)
 
-num_reseult = num_reverse.index(int(input('Введите число из списка:')))
-word_reseult = word_reverse.index(str(input('Введите слово из списка:')))
+print('Последнее вхождение слова: ', word_result)
 
-print(num_reseult, word_reseult)
