@@ -24,7 +24,7 @@ for k in ip.split('.'):       # проходимся по каждому окт�
 
 if correct_ip == 1:
     ip_first = int(ip.split('.')[0])    # Берём первый октет
-elif ip == '0.0.0.0':
+if ip == '0.0.0.0':
     print('unassigned IP-address')
 elif ip_first in range(1,128):
     print('Class A, unicast')
