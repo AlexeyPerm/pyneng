@@ -17,18 +17,22 @@
 """
 
 ip = input('Введите ip-адрес: ')
-ip_first= int(ip.split('.')[0])
+# bin_ip = bin(int(ip.replace('.','')))[2:]  # Переводим в двоичную систему. Убрал за ненадобностью
+ip_first= int(ip.split('.')[0])     # Берём первый октет
 
-if ip_first in range(1,128):
-    print('A')
+if ip == '0.0.0.0':
+    print('unassigned IP-address')
+elif ip_first in range(1,128):
+    print('Class A, unicast')
 elif ip_first in range(128,192):
-    print('B')
+    print('Class B, unicast')
 elif ip_first in range(192,224):
-    print('C')
+    print('Class B, unicast')
 elif ip_first in range(224,240):
-    print('D')
-
+    print('Class D, multicast')
+elif ip == '255.255.255.255':
+    print('local broadcast')
 else:
-    print('unused')
+    print('unused IP-address')
 
 
