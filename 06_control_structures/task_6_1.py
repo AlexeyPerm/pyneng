@@ -27,7 +27,7 @@ elif ip_first in range(1,128):
 elif ip_first in range(128,192):
     print('Class B, unicast')
 elif ip_first in range(192,224):
-    print('Class B, unicast')
+    print('Class C, unicast')
 elif ip_first in range(224,240):
     print('Class D, multicast')
 elif ip == '255.255.255.255':
