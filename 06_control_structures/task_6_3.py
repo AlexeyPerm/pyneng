@@ -40,13 +40,13 @@ for intf, vlan in fast_int['access'].items():
             print(' {}'.format(command))
 
 
-for intf_t, list_t in fast_int['trunk'].items():
-    vlan_t = str([int(a) for a in list_t[1:]]).strip('[]')
+for intf_t, list_t in fast_int['trunk'].items():    # Перебор значений ключа 'trunk'. Значение закидываем в переменные
+    vlan_t = str([int(a) for a in list_t[1:]]).strip('[]')  # Обработка списка list_t. Закидываем в переменную элементы, начиная со второго, убираем скобки, делаем их int.
     print('interface FastEthernet' + intf_t)
-    for command_t in trunk_template:
-        if command_t.endswith('allowed vlan'):
-            for k in list_t:
-                if k == 'add':
+    for command_t in trunk_template:    # Перебираем шаблон
+        if command_t.endswith('allowed vlan'):  # Если заканчивается на 'allowed vlan', то
+            for k in list_t:    # переборка списка list_t
+                if k == 'add':  # если в списке есть 'add', то... 
                     print(' {} add {}'.format(command_t, vlan_t))
                 elif k == 'del':
                     print(' {} remove {}'.format(command_t, vlan_t))
