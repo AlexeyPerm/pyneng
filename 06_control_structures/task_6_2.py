@@ -8,8 +8,8 @@
 mac = ['aabb:cc80:7000', 'aabb:dd80:7340', 'aabb:ee80:7000', 'aabb:ff80:7000']
 mac_cisco = []
 
-for k in mac:
-    a = k.replace(':','.')
-    mac_cisco.append(a)
+for k in mac:       # пробегаемся по каждому элементу в списке
+    a = k.replace(':','.')      # заменяем в текущей итерации цикла символы элемента
+    mac_cisco.append(a)         # закидываем в конце списка элемент в список
 
 print(mac_cisco)
