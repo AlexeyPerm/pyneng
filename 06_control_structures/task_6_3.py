@@ -45,7 +45,7 @@ for intf_t, list_t in fast_int['trunk'].items():    # Перебор значе�
     print('interface FastEthernet' + intf_t)
     for command_t in trunk_template:    # Перебираем шаблон
         if command_t.endswith('allowed vlan'):  # Если заканчивается на 'allowed vlan', то
-            for k in list_t:    # переборка списка list_t. Переборку смысла делать нет. Нужно переделать. 
+            for k in list_t:    # переборка списка list_t. Upd:Переборку смысла делать нет. Нужно переделать!!!
                 if k == 'add':  # если в списке есть 'add', то...
                     print(' {} add {}'.format(command_t, vlan_t))
                 elif k == 'del':
