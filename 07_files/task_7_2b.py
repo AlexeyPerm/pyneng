@@ -14,14 +14,11 @@ from sys import argv
 ignore = ['duplex', 'alias', 'Current configuration']
 #result = open('config_sw1_cleared.txt', 'w')
 
-with open(argv[1], 'r') as f,  open('config_sw1_cleared.txt', 'w') as result:    # Передали название файла скрипту
-    for list in f:  # Перебираем каждую строку файла
-        if list.startswith('!'):      # перепрыгнули через ! и пошли на начало цикла for
-            continue
-        for k in ignore:    # перебираем элементы ignore
-            if k in list:   # если есть в строке элемент из ignore, то прерываем цикл и переходит к след. строке.
+with open(argv[1], 'r') as f,  open('config_sw1_cleared.txt', 'w') as result:
+    for list in f:
+        for k in ignore:
+            if k in list:
                 break
         else:
             result.write(list)
-#result.close()
 
