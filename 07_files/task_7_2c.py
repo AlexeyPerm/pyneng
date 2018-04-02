@@ -10,5 +10,15 @@
 Проверить работу скрипта на примере файла config_sw1.txt.
 """
 
+from sys import argv
+
 ignore = ['duplex', 'alias', 'Current configuration']
+
+with open(argv[1], 'r') as f,  open(argv[2], 'w') as result:
+    for list in f:
+        for k in ignore:
+            if k in list:
+                break
+        else:
+            result.write(list)
 
