@@ -12,7 +12,6 @@
 from sys import argv
 
 ignore = ['duplex', 'alias', 'Current configuration']
-#result = open('config_sw1_cleared.txt', 'w')
 
 with open(argv[1], 'r') as f,  open('config_sw1_cleared.txt', 'w') as result:
     for list in f:
