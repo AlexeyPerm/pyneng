@@ -10,7 +10,7 @@ ignore = ['duplex', 'alias', 'Current configuration']
 
 with open(argv[1],'r') as f:    # Передали название файла скрипту
     for list in f:  # Перебираем каждую строку файла
-        if list.startswith('!'):      # перепрыгнули через ! и пошли на начало цикла
+        if list.startswith('!'):      # перепрыгнули через ! и пошли на начало цикла for
             continue
         for k in ignore:    # перебираем элементы ignore
             if k in list:   # если есть в строке элемент из ignore, то прерываем цикл и переходит к след. строке.

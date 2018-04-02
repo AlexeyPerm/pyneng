@@ -17,7 +17,7 @@ from sys import argv
 
 with open(argv[1],'r') as f:    # Передали название файла скрипту
     for list in f:
-        if list.startswith('!'):        # перепрыгнули через ! и пошли на начало цикла
+        if list.startswith('!'):        # перепрыгнули через ! и пошли в начало цикла for
             continue
         print(list)
 
