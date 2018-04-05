@@ -52,11 +52,19 @@ ip route-static 0.0.0.0 0.0.0.0 {gw}
 
 print(template_manage)
 
+
+vlans = []
 with open ('import.txt') as f:
-    for k in f:
-        if 'create' in k:
-            tag = k.split(' ')
-            print('vlan {}'.format(tag[4]),'description {}'.format(tag[2]))
+    for aaaaaa in f:
+        if 'create' in aaaaaa:
+            tag = aaaaaa.strip().split(' ')
+            vlans.append(tag[4])
+            print('vlan {}'.format(tag[4]),'\ndescription {}'.format(tag[2]))
 
 
+uplink= input('Enter Uplink: ')
+print('interface {}'.format(uplink),
+      '\ndescription uplink',
+      '\nport link-type trunk',
+      '\nport trunk allow-pass vlan {}'.format(*vlans))
 
