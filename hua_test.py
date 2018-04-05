@@ -1,3 +1,4 @@
+
 ip_address = input('Введите IP-сети в формате: 10.1.1.0/24 : \n').split('/')
 ip = ip_address[0].split('.')  # разделяем список на элементы
 prefix = ip_address[1]  # Взяли префикс
@@ -39,32 +40,36 @@ if correct_ip == True:
         print(incorrect)
         man_vlan = int((input('Введите номер VLAN ещё раз \n')))
 
-template_manage = """
+template_manage = f"""
 vlan {man_vlan}
  description Uprava_{man_vlan}
 
 interface Vlanif {man_vlan}
- ip address {ip_address} {prefix}
+ ip address {ip_address[0]} {prefix}
 
 ip route-static 0.0.0.0 0.0.0.0 {gw}
 
-""".format(man_vlan = man_vlan, ip_address = ip_address[0], prefix = prefix, gw = gw)
+"""
 
 print(template_manage)
 
 
-vlans = []
-with open ('import.txt') as f:
-    for aaaaaa in f:
-        if 'create' in aaaaaa:
-            tag = aaaaaa.strip().split(' ')
-            vlans.append(tag[4])
-            print('vlan {}'.format(tag[4]),'\ndescription {}'.format(tag[2]))
+vlans = []  # создаём пустой список вланов
+with open('import.txt') as f:
+    for string in f:    # перебираем каждую строку в файле
+        if 'create' in string:
+            tag = string.strip().split(' ')     # убрали перевод строк + разделили на элементы пробелом
+            vlans.append(tag[4])  # добавляем в созданный список вланы
+            print('vlan {}'.format(tag[4]),'\n description {}'.format(tag[2]))
 
+vlans_up = ' '.join(vlans)     # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
 
-uplink= input('Enter Uplink: ')
-print('interface {}'.format(uplink),
-      '\ndescription uplink',
-      '\nport link-type trunk',
-      '\nport trunk allow-pass vlan {}'.format(*vlans))
+int_uplink = input('\nEnter Uplink: \n')
+uplink_template = f"""
+interface {int_uplink}
+ description uplink
+ port link-type trunk
+ port trunk allow-pass vlan {vlans_up}
+"""
 
+print(uplink_template)
