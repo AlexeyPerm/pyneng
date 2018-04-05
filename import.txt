@@ -1,0 +1,30 @@
+# VLAN
+
+config vlan default delete 1-26
+create vlan vektor-vpn tag 20
+config vlan vektor-vpn add tagged 9,24
+create vlan iptv tag 100
+config vlan iptv add tagged 6,24
+create vlan uprava-307 tag 307
+config vlan uprava-307 add tagged 9,23-24
+create vlan 3406-2032 tag 3406
+config vlan 3406-2032 add tagged 24
+config vlan 3406-2032 add untagged 1
+create vlan 3565-2032 tag 3565
+config vlan 3565-2032 add tagged 24
+config vlan 3565-2032 add untagged 2
+create vlan 3566-2032 tag 3566
+config vlan 3566-2032 add tagged 24
+config vlan 3566-2032 add untagged 12
+create vlan 3569-2032 tag 3569
+config vlan 3569-2032 add tagged 24
+config vlan 3569-2032 add untagged 10
+create vlan 3570-2032 tag 3570
+config vlan 3570-2032 add tagged 9,24
+create vlan 3612-2032 tag 3612
+config vlan 3612-2032 add tagged 24
+config vlan 3612-2032 add untagged 6
+create vlan 3623-2032 tag 3623
+config vlan 3623-2032 add tagged 24
+config vlan 3623-2032 add untagged 13
+disable vlan_trunk
