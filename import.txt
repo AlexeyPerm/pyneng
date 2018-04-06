@@ -1,6 +1,16 @@
 # VLAN
-
+create vlan 4 tag 4
 config vlan default delete 1-26
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
+create vlan vektor-vpn tag 20
 create vlan vektor-vpn tag 20
 config vlan vektor-vpn add tagged 9,24
 create vlan iptv tag 100

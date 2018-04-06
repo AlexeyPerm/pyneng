@@ -104,7 +104,11 @@ with open('import.txt') as src, open('test.txt', 'a') as dst:
             dst.write(access_template)
             print(access_template)
 
-vlans_up = ' '.join(vlans)  # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
+#vlans_up = ' '.join(vlans)  # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
+
+parts = [vlans[i:i+10] for i in range(0, len(vlans), 10)]
+
+result_parts = '\n'.join(['port trunk allow-pass vlan ' + ' '.join(vlans[i:i + 10]) for i in range(0, len(vlans), 10)])
 
 # Выводим конфиг uplink-интерфейса
 
@@ -113,7 +117,8 @@ uplink_template = ('\n'
                    f'interface {int_uplink}\n'
                    f' description uplink\n'
                    f' port link-type trunk\n'
-                   f' port trunk allow-pass vlan {vlans_up}\n')
+                   f'{result_parts}') #  + result_parts)
+
 
 other = ("\nclock timezone prm add 05:00:00\n"
          "ntp-service server disable\n"
