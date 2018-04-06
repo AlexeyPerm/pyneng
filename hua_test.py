@@ -61,7 +61,7 @@ template_manage = (f"\n"
 vlans = []  # создаём пустой список вланов
 with open('import.txt') as src, open('test.txt', 'w') as dst:
     for string in src:  # перебираем каждую строку в файле
-        if 'create' in string:
+        if string.startswith('create'):
             tag = string.strip().split(' ')  # убрали перевод строк + разделили на элементы пробелом
             if int(tag[4]) == man_vlan:
                 vlans.append(tag[4])
