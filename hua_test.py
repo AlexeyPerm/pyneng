@@ -47,15 +47,14 @@ if correct_ip == True:
         print(incorrect)
         man_vlan = int((input('Введите номер VLAN ещё раз \n')))
 
-template_manage = f"""
-vlan {man_vlan}
- description Uprava_{man_vlan}
-
-interface Vlanif {man_vlan}
- ip address {ip_address[0]} {prefix}
-
-ip route-static 0.0.0.0 0.0.0.0 {gw}
-"""
+template_manage = (f"\n"
+                   f"vlan {man_vlan}\n"
+                   f" description Uprava_{man_vlan}\n"
+                   f"\n"
+                   f"interface Vlanif {man_vlan}\n"
+                   f" ip address {ip_address[0]} {prefix}\n"
+                   f"\n"
+                   f"ip route-static 0.0.0.0 0.0.0.0 {gw}\n")
 
 # Создаём список вланов.
 
@@ -69,7 +68,8 @@ with open('import.txt') as src, open('test.txt', 'w') as dst:
                 continue
             elif int(tag[4]) == 100:
                 vlans.append(tag[4])  # добавляем в созданный список вланы
-                result_vlans = (f"vlan {tag[4]}\n"
+                result_vlans = (f"igmp-snooping enable\n"
+                                f"vlan {tag[4]}\n"
                                 f" description {tag[2]}\n"
                                 f" igmp-snooping enable\n"
                                 f" multicast-vlan enable\n"
@@ -109,16 +109,22 @@ vlans_up = ' '.join(vlans)  # вставляем пробелы между эл�
 # Выводим конфиг uplink-интерфейса
 
 int_uplink = input('\nEnter Uplink: \n')
-uplink_template = (f"\n"
-                   f"interface {int_uplink}\n"
-                   f" description uplink\n"
-                   f" port link-type trunk\n"
-                   f" port trunk allow-pass vlan {vlans_up}\n")
+uplink_template = ('\n'
+                   f'interface {int_uplink}\n'
+                   f' description uplink\n'
+                   f' port link-type trunk\n'
+                   f' port trunk allow-pass vlan {vlans_up}\n')
+
+other = ("\nclock timezone prm add 05:00:00\n"
+         "ntp-service server disable\n"
+         "ntp-service ipv6 server disable\n"
+         "ntp-service unicast-server 192.168.2.94\n")
 
 with open('test.txt', 'a') as dst:
     dst.write(template_manage)
     dst.write(uplink_template)
     systemname = ('\nsysname ' + (input('Enter systemname: ')))
     dst.write(systemname)
+    dst.write(other)
 
-print(template_manage, uplink_template, systemname)
+print(template_manage, uplink_template, systemname, other)
