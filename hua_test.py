@@ -1,5 +1,6 @@
 """
-Конфиг для замены коммутатора Dlink на Huawei.
+Для Python 3.6 и выше, так как используются f-строки
+Скрипт для замены коммутатора Dlink на Huawei.
 """
 # вводим айпишник
 ip_address = input('Введите IP-сети в формате: 10.1.1.0/24 : \n').split('/')
@@ -54,41 +55,70 @@ interface Vlanif {man_vlan}
  ip address {ip_address[0]} {prefix}
 
 ip route-static 0.0.0.0 0.0.0.0 {gw}
-
 """
 
 # Создаём список вланов.
 
 vlans = []  # создаём пустой список вланов
-with open('import.txt') as src, open('test.txt','w') as dst:
-    for string in src:    # перебираем каждую строку в файле
+with open('import.txt') as src, open('test.txt', 'w') as dst:
+    for string in src:  # перебираем каждую строку в файле
         if 'create' in string:
-            tag = string.strip().split(' ')     # убрали перевод строк + разделили на элементы пробелом
+            tag = string.strip().split(' ')  # убрали перевод строк + разделили на элементы пробелом
             if int(tag[4]) == man_vlan:
                 vlans.append(tag[4])
                 continue
+            elif int(tag[4]) == 100:
+                vlans.append(tag[4])  # добавляем в созданный список вланы
+                result_vlans = (f"vlan {tag[4]}\n"
+                                f" description {tag[2]}\n"
+                                f" igmp-snooping enable\n"
+                                f" multicast-vlan enable\n"
+                                ' \n')
+                dst.write(result_vlans)
+                print(result_vlans)
             else:
                 vlans.append(tag[4])  # добавляем в созданный список вланы
                 result_vlans = (f"vlan {tag[4]}\n"
-                                f" description {tag[2]}\n")
+                                f" description {tag[2]}\n"
+                                ' \n')
                 dst.write(result_vlans)
                 print(result_vlans)
 
-vlans_up = ' '.join(vlans)     # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
+with open('import.txt') as src, open('test.txt', 'a') as dst:
+    for string in src:
+        if 'create' in string:
+            tag = string.strip().split(' ')
+        if 'untagged' in string:
+            int_number = string.strip().split(' ')
+            access_template = (f'interface Ethernet0/0/{int_number[5]}\n'
+                               ' port link-type access\n'
+                               f' port default vlan {tag[4]}\n'
+                               ' loopback-detect recovery-time 300\n'
+                               ' loopback-detect enable\n'
+                               ' bpdu disable\n'
+                               ' storm-control broadcast min-rate 500 max-rate 500\n'
+                               ' storm-control multicast min-rate 500 max-rate 500\n'
+                               ' storm-control action error-down\n'
+                               ' storm-control enable log\n'
+                               ' \n')
+            dst.write(access_template)
+            print(access_template)
+
+vlans_up = ' '.join(vlans)  # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
 
 # Выводим конфиг uplink-интерфейса
 
 int_uplink = input('\nEnter Uplink: \n')
-uplink_template = f"""
-interface {int_uplink}
- description uplink
- port link-type trunk
- port trunk allow-pass vlan {vlans_up}
-"""
+uplink_template = (f"\n"
+                   f"interface {int_uplink}\n"
+                   f" description uplink\n"
+                   f" port link-type trunk\n"
+                   f" port trunk allow-pass vlan {vlans_up}\n")
 
-with open('test.txt','a') as dst:
+with open('test.txt', 'a') as dst:
     dst.write(template_manage)
     dst.write(uplink_template)
+    systemname = ('\nsysname ' + (input('Enter systemname: ')))
+    dst.write(systemname)
 
-print(template_manage, uplink_template)
-
+print(template_manage, uplink_template, systemname)
