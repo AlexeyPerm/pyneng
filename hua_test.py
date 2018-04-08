@@ -104,11 +104,16 @@ with open('import.txt') as src, open('test.txt', 'a') as dst:
             dst.write(access_template)
             print(access_template)
 
-#vlans_up = ' '.join(vlans)  # вставляем пробелы между элементами в строке и кидаем в переменную для uplink
-
 parts = [vlans[i:i+10] for i in range(0, len(vlans), 10)]
 
-result_parts = '\n'.join(['port trunk allow-pass vlan ' + ' '.join(vlans[i:i + 10]) for i in range(0, len(vlans), 10)])
+# Так как Huawei принимает максимум 10 вланов в строке "port trunk allow-pass vlan ", то нужно разбить спиков вланов
+# vlans на строки, где в "port trunk allow-pass vlan " вставляться 10 вланов.
+# for i in range(0, len(vlans), 10)]) - берём диапозон от 0 до кол-ва вланов в списке и указываем с шагом 10.
+# К строке "port trunk allow-pass vlan " добавляем пробел, вланы берём из среза. Изначально срез выглядит так:
+# vlans[0:0+10], на втором проходе будет [10:10+10] и и т.д.
+# Ну и добавляем между строк перевод строки.
+
+result_parts = '\n'.join([' port trunk allow-pass vlan ' + ' '.join(vlans[i:i + 10]) for i in range(0, len(vlans), 10)])
 
 # Выводим конфиг uplink-интерфейса
 
