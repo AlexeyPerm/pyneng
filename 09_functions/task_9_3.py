@@ -47,5 +47,5 @@ def get_int_vlan_map(config_file):
 
     return access_ports, trunk_ports
 
-
 pprint(get_int_vlan_map('config_sw1.txt'))  # pprint для удобства чтения. никаких переводов строки при этом нет
+
