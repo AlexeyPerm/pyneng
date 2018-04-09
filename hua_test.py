@@ -127,7 +127,8 @@ uplink_template = ('\n'
 other = ("\nclock timezone prm add 05:00:00\n"
          "ntp-service server disable\n"
          "ntp-service ipv6 server disable\n"
-         "ntp-service unicast-server 192.168.2.94\n")
+         "ntp-service unicast-server 192.168.2.94\n"
+         "undo ip route-static 0.0.0.0 0.0.0.0 192.168.200.9\n")
 
 with open('test.txt', 'a') as dst:
     dst.write(template_manage)
