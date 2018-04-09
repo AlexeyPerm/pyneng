@@ -41,9 +41,10 @@ def get_int_vlan_map(config_file):
     for interface, comand in config.items():  # закидываем в переменные ключ и значения словаря
         for k in comand:
             if str(k).startswith('switchport access'):
-                access_ports[interface] = int(k.split()[-1])  # Если встречается строка, то кидаем значение номер влан
+                access_ports[interface] = int(k.split()[-1])  # Если встречается строка, то кидаем в значение номер влан
             elif 'trunk allowed' in k:
                 trunk_ports[interface] = [int(j) for j in k.split()[-1].split(',')]  # выковыриваем вланы
+
     return access_ports, trunk_ports
 
 
