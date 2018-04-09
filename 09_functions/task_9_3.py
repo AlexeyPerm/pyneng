@@ -24,26 +24,27 @@
 
 from pprint import pprint
 
+
 def get_int_vlan_map(config_file):
-    with open('config_sw1.txt') as src:
+    with open(config_file) as src:
         config = {}
-        for line in src:
-            if line.startswith('interface'):
+        for line in src:  # Пробегаемся по каждой строке в файле
+            if line.startswith('interface'):  # Ищем строку, где встречается нужно слово
                 interface = line.split(' ')[1].strip()
-                config[interface] = []
+                config[interface] = []  # создаём пустой словарь, где ключ interface
             elif line.startswith(' '):
-                config[interface].append(line.strip())
+                config[interface].append(line.strip())  # Добавляем в словарь значения (конфиг интерфейса)
 
     trunk_ports = {}
     access_ports = {}
 
-    for interface, comand in config.items():
-        if str(comand).startswith('switchport access'):
-            access_ports[interface] = str(comand).split()[-1]
+    for interface, comand in config.items():  # закидываем в переменные ключ и значения словаря
+        for k in comand:
+            if str(k).startswith('switchport access'):
+                access_ports[interface] = int(k.split()[-1])  # Если встречается строка, то кидаем значение номер влан
+            elif 'trunk allowed' in k:
+                trunk_ports[interface] = [int(j) for j in k.split()[-1].split(',')]  # выковыриваем вланы
+    return access_ports, trunk_ports
 
 
-
-
-    return access_ports
-
-pprint(get_int_vlan_map('config_sw1.txt'))
+pprint(get_int_vlan_map('config_sw1.txt'))  # pprint для удобства чтения. никаких переводов строки при этом нет
