@@ -25,12 +25,25 @@
 from pprint import pprint
 
 def get_int_vlan_map(config_file):
-    with open(config_file) as src:
+    with open('config_sw1.txt') as src:
         config = {}
         for line in src:
             if line.startswith('interface'):
-                interface = line.split(' ')[1]
+                interface = line.split(' ')[1].strip()
                 config[interface] = []
-            return config
+            elif line.startswith(' '):
+                config[interface].append(line.strip())
+
+    trunk_ports = {}
+    access_ports = {}
+
+    for interface, comand in config.items():
+        if str(comand).startswith('switchport access'):
+            access_ports[interface] = str(comand).split()[-1]
+
+
+
+
+    return access_ports
 
 pprint(get_int_vlan_map('config_sw1.txt'))
