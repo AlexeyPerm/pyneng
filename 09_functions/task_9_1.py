@@ -41,6 +41,7 @@
 
 from pprint import pprint
 
+
 def generate_access_config(access):
     '''
     access - словарь access-портов,
@@ -58,17 +59,15 @@ def generate_access_config(access):
         'spanning-tree portfast',
         'spanning-tree bpduguard enable'
     ]
-    access_port = []    # создали пустой список
+    access_port = []  # создали пустой список
 
-    for interface, vlan in access_dict.items():     # перебираем словрь и закидываем в переменные ключ: значение
+    for interface, vlan in access_dict.items():  # перебираем словрь и закидываем в переменные ключ: значение
         access_port.append(f'interface {interface}')
-        for k in access_template:   # Пробегаемся по шаблону
+        for k in access_template:  # Пробегаемся по шаблону
             if k.endswith('vlan'):  # Если заканчивается на vlan
                 k = k + ' ' + str(vlan) # то в строке добавляем значение словаря access_dict, то есть номер влана
             access_port.append(k)
     return access_port
-
-
 
 access_dict = {
     'FastEthernet0/12': 10,
@@ -77,5 +76,4 @@ access_dict = {
     'FastEthernet0/17': 150
 }
 
-pprint(generate_access_config(access_dict))     # pprint выводит в читабельном виде результат
-
+pprint(generate_access_config(access_dict))  # pprint выводит в читабельном виде результат
