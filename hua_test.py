@@ -104,7 +104,7 @@ with open('import.txt') as src, open('test.txt', 'a') as dst:
             dst.write(access_template)
             print(access_template)
 
-parts = [vlans[i:i + 10] for i in range(0, len(vlans), 10)]
+#parts = [vlans[i:i + 10] for i in range(0, len(vlans), 10)]
 
 # Так как Huawei принимает максимум 10 вланов в строке "port trunk allow-pass vlan ", то нужно разбить спиков вланов
 # vlans на строки, где в "port trunk allow-pass vlan " вставляться 10 вланов.
