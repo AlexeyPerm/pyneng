@@ -21,6 +21,8 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
 
+from pprint import pprint
+
 ignore = ['duplex', 'alias', 'Current configuration']
 
 
@@ -37,18 +39,20 @@ def ignore_command(command, ignore):
     '''
     return any(word in command for word in ignore)
 
-def config(config_file):
-    with open(config_file) as src:
+def config(open_cfg):
+    with open(open_cfg) as src:
+        result = {}
         for line in src:
             if ignore_command(command=line, ignore=ignore) or line.startswith('!'):
-                pass
+                continue
+            if not line.startswith(' '):
+                key = line.strip()
+                result[key] = []
             else:
-                if not ' ':
-                    key = line
-                else:
-                    command[key] = []
+                result[key].append(line.strip())
 
-    return key
+    return result
 
-print(key)
+pprint(config('config_sw1.txt'))
+
 
