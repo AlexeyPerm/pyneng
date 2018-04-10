@@ -43,13 +43,13 @@ def config(open_cfg):
     with open(open_cfg) as src:
         result = {}
         for line in src:
-            if ignore_command(command=line, ignore=ignore) or line.startswith('!'):
+            if ignore_command(command=line, ignore=ignore) or line.startswith('!'): # если это есть, то продолжаем
                 continue
-            if not line.startswith(' '):
-                key = line.strip()
-                result[key] = []
+            if not line.startswith(' '):    # если не содержит проблем в начале строки, то
+                key = line.strip()  # ключ - строка, в которой убраны whitespace-символы
+                result[key] = []    # закидываем в словарь ключ с пустным значением
             else:
-                result[key].append(line.strip())
+                result[key].append(line.strip())    # иначе строка является значением.
 
     return result
 
