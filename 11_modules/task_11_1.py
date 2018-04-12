@@ -30,5 +30,10 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 from pprint import pprint
 
-def parse_cdp_neighbors(src_output):
-
+with open('sw1_sh_cdp_neighbors.txt') as src:
+    for line in src:
+        result = {}
+        line = line.split('\n')
+        if '>' in line:
+            localdev = line[0].split('>')[0]
+            print(localdev)
