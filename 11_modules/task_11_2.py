@@ -38,4 +38,4 @@ from task_11_1 import parse_cdp_neighbors
 with open('sw1_sh_cdp_neighbors.txt') as src:
     src_file = src.read()
 
-draw_topology(parse_cdp_neighbors(src_file))
+draw_topology(parse_cdp_neighbors(src_file))    # Передали как аргумен вывод функции parse_cdp_neibors
