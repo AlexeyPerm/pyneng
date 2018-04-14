@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 11.1
 
 Создать функцию parse_cdp_neighbors, которая обрабатывает
@@ -26,10 +26,9 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 Проверить работу функции на содержимом файла sw1_sh_cdp_neighbors.txt
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
-'''
+"""
 
 from pprint import pprint
-
 
 def parse_cdp_neighbors(src_file):
     list = src_file.split('\n')
@@ -42,7 +41,6 @@ def parse_cdp_neighbors(src_file):
             remote_interface = line.split()[-2] + line.split()[-1]  # собираем интерфейс вида fa0/0.
             result[local_device, local_interface] = (remote_device, remote_interface)
     return result
-
 
 # Если функция запускается как самостоятельный элемент, а не импортируется куда-то как модуль, то выполняется следующее
 if __name__ == '__main__':
