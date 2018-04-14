@@ -26,6 +26,11 @@
 > pip install graphviz
 
 '''
+# Windows: Нужно установить Graphviz2.38 с сайта https://graphviz.gitlab.io/download/
+# Затем добавить следующие 2 строки в код
+# import os
+# os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+# Но можно в PATH добавить переменную C:\Program Files (x86)\Graphviz2.38\bin
 
 from draw_network_graph import draw_topology
 from task_11_1 import parse_cdp_neighbors
