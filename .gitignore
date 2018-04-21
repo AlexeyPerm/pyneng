@@ -9,3 +9,5 @@ test.txt
 11_modules/img/topology.svg
 11_modules/img/topology
 *.pyc
+venv
+.editorconfig
