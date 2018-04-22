@@ -29,3 +29,39 @@ IP-адреса могут быть в формате:
 
 Для выполнения задачи можно воспользоваться функцией check_ip_addresses из задания 12.1
 '''
+
+
+import subprocess
+
+
+def check_ip_addresses(ip_address):
+
+    ping_ok = []
+    ping_not_ok = []
+
+    for k in ip_address:
+        if '-' in k.split('.'):
+
+            reply = subprocess.run(['ping', '-c', '1', k],
+                                   stdout=subprocess.DEVNULL,
+                                   stderr=subprocess.DEVNULL)
+        if reply.returncode == 0:
+            ping_ok.append(k)
+        elif reply.returncode == 1:
+            ping_not_ok.append(k)
+    return ping_ok, ping_not_ok
+
+
+def check_list_ip(list_ip):
+
+    for k in list_ip:
+        if '-' in k.rsplit('.', maxsplit=1)[1]:
+            k = k.rsplit('.', maxsplit=1)
+            a = [i for i in range(int(k[1].split('-')[0]), int(k[1].split('-')[1]) + 1)]
+            print(a)
+
+
+if __name__ == '__main__':
+    ip = ['8.8.8.8', '254.254.254.254', '1.1.1.1', '254.254.253.254']
+    result = check_ip_addresses(ip)
+    print(f'Available IP: {result[0]} \nUnavailable IP: {result[1]}')
