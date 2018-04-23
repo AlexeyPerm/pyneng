@@ -50,7 +50,7 @@ def check_list_ip(ip_list):
     while i > 0:
         for ip in ip_list:
             if '-' in ip:
-                ip_begin = ip.split('-')[0].rsplit('.', maxsplit=1)[0]
+                ip_begin = ip.split('-')[0].rsplit('.', maxsplit=1)[0]  # первые три неизменяемых октета в диапазоне
                 if len(ip.split('-')[1]) > 3:   # проверка, как задан диапазон. Такой ли вид 127.0.0.1-127.0.0.3 ?
                     ip_list.remove(ip)  # удаляем из списка этот диапазон, чтобы немножились записи результата
                     ip = ip.split('-')
