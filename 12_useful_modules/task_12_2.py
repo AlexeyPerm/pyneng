@@ -41,7 +41,7 @@ def check_list_ip(ip_list):
     в каком-либо элементе списка и, если он есть, то "разворачивает его".
     While используется, чтобы делать проверку для каждого элемента списка,
     так как диапазонов может быть несколько. Возвращает обновлённый список.
-    Пример: Было ip_list = ['12.3.4.5-7', '127.0.0.1-127.0.0.3]
+    Пример: Было ip_list = ['12.3.4.5-7', '127.0.0.1-127.0.0.3']
             Стало ip_list = ['12.3.4.5', '12.3.4.6', '12.3.4.7', '127.0.0.1', '127.0.0.2', '127.0.0.3']
 
     """
@@ -51,21 +51,23 @@ def check_list_ip(ip_list):
         for ip in ip_list:
             if '-' in ip:
                 ip_begin = ip.split('-')[0].rsplit('.', maxsplit=1)[0]
-                if len(ip.split('-')[1]) > 3:
+                if len(ip.split('-')[1]) > 3:   # проверка, как задан диапазон. Такой ли вид 127.0.0.1-127.0.0.3 ?
+                    ip_list.remove(ip)  # удаляем из списка этот диапазон, чтобы немножились записи результата
                     ip = ip.split('-')
                     rng = []
                     for j in ip:
-                        rng.append(j.rsplit('.', maxsplit=1)[-1])
+                        rng.append(j.rsplit('.', maxsplit=1)[-1])   # ищем границы диапазона
                 else:
-                    rng = ip.rsplit('.', maxsplit=1)[1].split('-')
-                octet_range = [i for i in range(int(rng[0]), int(rng[1]) + 1)]
+                    ip_list.remove(ip)  # удаляем из списка этот диапазон, чтобы немножились записи результата
+                    rng = ip.rsplit('.', maxsplit=1)[1].split('-')  # ищем границы диапазона
+                octet_range = [i for i in range(int(rng[0]), int(rng[1]) + 1)]  # "Разворачиваем диапазон rng[n,m]
                 for k in octet_range:
-                    ip_list.append(ip_begin + '.' + str(k))
+                    ip_list.append(ip_begin + '.' + str(k))     # скидываем в список итоговые айпишники
         i -= 1
     return ip_list
 
 
 if __name__ == '__main__':
-    ip_list = ['8.8.8.8', '254.254.254.250-252', '1.1.1.1-1.1.1.3', '127.0.0.1-3', '254.254.253.255']
+    ip_list = ['8.8.8.8', '1.1.1.1-1.1.1.3', '127.0.0.1-3', '254.254.253.240-254.254.253.243']
     result = check_ip_addresses(check_list_ip(ip_list))
     print(f'Available IP: {result[0]} \nUnavailable IP: {result[1]}')
