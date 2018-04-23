@@ -23,7 +23,7 @@ def check_ip_addresses(ip_address):
     ping_not_ok = []
 
     for k in ip_address:
-        reply = subprocess.run(['ping', '-c', '1', k],
+        reply = subprocess.run(['ping', '-c', '3', k],
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
         if reply.returncode == 0:
