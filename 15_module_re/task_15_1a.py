@@ -12,4 +12,16 @@
 
 '''
 
-regex = ''
+from sys import argv
+import re
+
+regex = "\S0/[1|3] +"   # \S - всё, кроме пробелов. затели либо 0/1, либо 0/3
+
+file = argv[1]  # передаем в скрипт название файла
+
+
+with open(file) as f:
+    for line in f:
+        match = re.search(regex, line)  # ищем совпадения регулярки, введёной ранее
+        if match:       # если совпадает, то print
+            print(line.strip())
