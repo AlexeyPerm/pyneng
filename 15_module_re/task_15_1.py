@@ -47,7 +47,7 @@ file, regex = argv[0], argv[1]
 
 with open(file) as f:
     for line in f:
-        match = re.search(regex)
+        match = re.search(regex, line)
         if match:
             print(line)
 
