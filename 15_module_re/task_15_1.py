@@ -38,3 +38,22 @@ Loopback100                100.0.0.1       YES manual up                    up
 
 
 '''
+
+from sys import argv
+import re
+
+file, regex = argv[0], argv[1]
+
+
+with open(file) as f:
+    for line in f:
+        match = re.search(regex)
+        if match:
+            print(line)
+
+
+
+
+
+
+
