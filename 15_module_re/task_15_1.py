@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 15.1
 
 Создать скрипт, который будет ожидать два аргумента:
@@ -37,23 +37,16 @@ Loopback0                  10.1.1.1        YES manual up                    up
 Loopback100                100.0.0.1       YES manual up                    up
 
 
-'''
+"""
 
 from sys import argv
 import re
 
-file, regex = argv[0], argv[1]
+file, regex = argv[1], argv[2]  # передаем в скрипт название файла + регулярное выражение
 
 
 with open(file) as f:
     for line in f:
-        match = re.search(regex, line)
-        if match:
+        match = re.search(regex, line)  # ищем совпадения регулярки, введёной ранее
+        if match:       # если совпадает, то print
             print(line)
-
-
-
-
-
-
-
