@@ -23,7 +23,7 @@
 """
 
 import re
-from pprint import pprint
+
 
 
 def return_match(file_name, regexp):
@@ -32,11 +32,11 @@ def return_match(file_name, regexp):
         for line in f:
             match = re.search(regexp, line)
             if match:
-                result.append(match.group(1))
+                result.append(match.group())
         return result
 
 
 if __name__ == '__main__':
     file = 'sh_ip_int_br.txt'
-    regex = r'\S+\s+((\d{1,3}.?){4})'   # непробельный, пробельный, (1-3 цифры, точка один или более раз.)*4 раза
-    pprint(return_match(file, regex))
+    regex = r'(\d{1,3}.?){4}'   # непробельный, пробельный, (1-3 цифры, точка один или более раз.)*4 раза
+    print(return_match(file, regex))
