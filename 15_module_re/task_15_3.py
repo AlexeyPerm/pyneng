@@ -23,4 +23,18 @@
 
 '''
 
+import re
+
 def parse_cfg(config):
+    result = []
+    regex = r"((\d{1,3}.?){4} ?){2}"  # ищем совпадения, куда попадут IP и mac-address
+    with open(config) as f:
+        for line in f:
+            if line.startswith(' ip address'):
+                match = re.search(regex, line)
+                if match:
+                    result.append(tuple(match.group().split()))   # в список добавляются кортежи из совпадений IP + mac
+    return result
+
+if __name__ == '__main__':
+    print(parse_cfg('config_r1.txt'))
