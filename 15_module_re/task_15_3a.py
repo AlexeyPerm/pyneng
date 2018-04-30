@@ -23,12 +23,12 @@
 
 import re
 
+
 def parse_cfg(config):
     regex = (r'interface (?P<intf>\S+)'
              r'| ip address (?P<ip>[\d.]+ [\d.]+)')
 
     result = {}
-
     with open('/home/rustok/git/pyneng/15_module_re/config_r1.txt') as f:
         match_iter = re.finditer(regex, f.read())
         for match in match_iter:
@@ -38,7 +38,6 @@ def parse_cfg(config):
             elif interface:
                 result[interface] = tuple(match.group('ip').split())
     return {key: result[key] for key in result if result[key]}
-
 
 
 if __name__ == '__main__':
