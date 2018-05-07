@@ -67,16 +67,18 @@ def parse_sh_version(output):
 
 def write_to_csv(file, data):
     with open(file, 'w') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in data:
             writer.writerow(row)
+
+
+data = [headers]
 
 
 for file in sh_version_files:
     hostname = re.search(r'\w+_(.+)\.txt', file).group(1)
     with open(file) as f:
         ios, image, uptime = parse_sh_version(f.read())
-        result = [[hostname, ios, image, uptime]]
-        # print(result)
-
-write_to_csv('routers_inventory.csv', result)
+        data.append([hostname, ios, image, uptime])
+        # print(data)
+write_to_csv('routers_inventory.csv', data)
