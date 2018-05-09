@@ -36,10 +36,11 @@ import yaml
 
 # from pprint import pprint
 
-sh_cdp = glob.glob('sh_cdp*')
+sh_cdp = glob.glob('sh_cdp*')   # запихиваем в переменную все файлы, соответсвующие маске
 
 
 def generate_topology_from_cdp(list_of_files, topology_filename="topology.yaml", save_to_file=True):
+    """комментировать нечего, так как в задании всё написано"""
     to_yaml = []
     for k in list_of_files:
         with open(k) as f:
