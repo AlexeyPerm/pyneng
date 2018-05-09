@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 17.2b
 
 Переделать функциональность скрипта из задания 17.2a,
@@ -28,4 +28,28 @@
 Записать полученный словарь в файл topology.yaml.
 
 Не копировать код функции parse_sh_cdp_neighbors
-'''
+"""
+
+from task_17_2 import parse_sh_cdp_neighbors
+import glob
+import yaml
+
+# from pprint import pprint
+
+sh_cdp = glob.glob('sh_cdp*')
+
+
+def generate_topology_from_cdp(list_of_files, topology_filename="topology.yaml", save_to_file=True):
+    to_yaml = []
+    for k in list_of_files:
+        with open(k) as f:
+            to_yaml.append(parse_sh_cdp_neighbors(f.read()))
+    if save_to_file:
+        with open(topology_filename, 'w') as result:
+            yaml.dump(to_yaml, result)
+    else:
+        print(to_yaml)
+
+
+if __name__ == '__main__':
+    generate_topology_from_cdp(sh_cdp)
