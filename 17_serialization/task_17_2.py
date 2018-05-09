@@ -31,7 +31,7 @@ from pprint import pprint
 def parse_sh_cdp_neighbors(data):
     local_dev = re.search(r'(\S+)>', data).group(1)
     # далее используются именнованные группы только для удобства чтения.
-    regex = r"(?P<remote_dev>\S+) +(?P<local_int>\S+ ?\d/\d).+\d+ +(?P<remote_int>\S+ ?\d/\d)"
+    regex = r"(?P<remote_dev>\S+) +(?P<local_int>\S+ ?\d/\d).+\S+ +(?P<remote_int>\S+ ?\d/\d)"
     result = {local_dev: {}}
     match = re.findall(regex, data)  # находим все совпадения
     for k in match:
