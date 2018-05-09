@@ -27,14 +27,15 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 import re
 from pprint import pprint
 
+
 def parse_sh_cdp_neighbors(data):
     local_dev = re.search(r'(\S+)>', data).group(1)
     # далее используются именнованные группы только для удобства чтения.
     regex = r"(?P<remote_dev>\S+) +(?P<local_int>\S+ ?\d/\d).+\d+ +(?P<remote_int>\S+ ?\d/\d)"
     result = {local_dev: {}}
-    match = re.findall(regex, data)
+    match = re.findall(regex, data)  # находим все совпадения
     for k in match:
-        result[local_dev].update({k[1]: {k[0]: k[2]}})
+        result[local_dev].update({k[1]: {k[0]: k[2]}})  # конструкция словарь в словаре
 
     return result
 
