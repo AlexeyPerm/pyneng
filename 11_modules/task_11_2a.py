@@ -40,8 +40,7 @@ files = ['sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.
 result = {}
 for file in files:
     with open(file) as f:
-        f = f.read()
-        result.update(parse_cdp_neighbors(f))
+        result.update(parse_cdp_neighbors(f.read()))
 
 # Далее выполняется проверка на дублирование линков.
 # Пробегаемся по списку значений словаря
