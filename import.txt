@@ -1,40 +1,158 @@
+
+
 # VLAN
-create vlan 4 tag 4
-config vlan default delete 1-26
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-create vlan vektor-vpn tag 20
-config vlan vektor-vpn add tagged 9,24
+
+disable asymmetric_vlan
+disable qinq
+config vlan default delete 1-28
+config vlan default advertisement enable
+create vlan voice_vlan-35 tag 35
+config vlan voice_vlan-35 add tagged 5,12,26
+config vlan voice_vlan-35 add untagged 1,8
+create vlan Shcelchkov tag 80
+config vlan Shcelchkov add tagged 12,26
 create vlan iptv tag 100
-config vlan iptv add tagged 6,24
-create vlan uprava-307 tag 307
-config vlan uprava-307 add tagged 9,23-24
-create vlan 3406-2032 tag 3406
-config vlan 3406-2032 add tagged 24
-config vlan 3406-2032 add untagged 1
-create vlan 3565-2032 tag 3565
-config vlan 3565-2032 add tagged 24
-config vlan 3565-2032 add untagged 2
-create vlan 3566-2032 tag 3566
-config vlan 3566-2032 add tagged 24
-config vlan 3566-2032 add untagged 12
-create vlan 3569-2032 tag 3569
-config vlan 3569-2032 add tagged 24
-config vlan 3569-2032 add untagged 10
-create vlan 3570-2032 tag 3570
-config vlan 3570-2032 add tagged 9,24
-create vlan 3612-2032 tag 3612
-config vlan 3612-2032 add tagged 24
-config vlan 3612-2032 add untagged 6
-create vlan 3623-2032 tag 3623
-config vlan 3623-2032 add tagged 24
-config vlan 3623-2032 add untagged 13
-disable vlan_trunk
+config vlan iptv add tagged 5,26
+create vlan Uprava tag 301
+config vlan Uprava add tagged 5,12,26
+config vlan Uprava add untagged 24
+create vlan beeline-kuybysheva-3-895 tag 895
+config vlan beeline-kuybysheva-3-895 add tagged 26
+config vlan beeline-kuybysheva-3-895 add untagged 11
+create vlan beeline-kuybysheva-37-1259 tag 1259
+config vlan beeline-kuybysheva-37-1259 add tagged 12,26
+create vlan saturn-1705 tag 1705
+config vlan saturn-1705 add tagged 5,26
+create vlan VideoCamera-Kuybysheva-37-Az tag 2603
+config vlan VideoCamera-Kuybysheva-37-Az add tagged 12,26
+create vlan VideoCamera-Cakanov tag 2606
+config vlan VideoCamera-Cakanov add tagged 5,26
+create vlan video-2626 tag 2626
+config vlan video-2626 add tagged 12,26
+create vlan video-2638 tag 2638
+config vlan video-2638 add tagged 5,26
+create vlan video-2650 tag 2650
+config vlan video-2650 add tagged 12,26
+create vlan 3044-4020 tag 3044
+config vlan 3044-4020 add tagged 12,26
+create vlan 3056-4020 tag 3056
+config vlan 3056-4020 add tagged 26
+config vlan 3056-4020 add untagged 3
+create vlan 3057-4020 tag 3057
+config vlan 3057-4020 add tagged 2,26
+create vlan 3058-4020 tag 3058
+config vlan 3058-4020 add tagged 6,26
+create vlan 3059-4020 tag 3059
+config vlan 3059-4020 add tagged 7,26
+create vlan 3060-4020 tag 3060
+config vlan 3060-4020 add tagged 10,26
+create vlan 3061-4020 tag 3061
+config vlan 3061-4020 add tagged 13,26
+create vlan 3062-4020 tag 3062
+config vlan 3062-4020 add tagged 12,26
+create vlan 3063-4020 tag 3063
+config vlan 3063-4020 add tagged 14,26
+create vlan 3064-4020 tag 3064
+config vlan 3064-4020 add tagged 15,26
+create vlan 3065-4020 tag 3065
+config vlan 3065-4020 add tagged 12,26
+create vlan 3066-4020 tag 3066
+config vlan 3066-4020 add tagged 12,26
+create vlan 3067-4020 tag 3067
+config vlan 3067-4020 add tagged 12,26
+create vlan 3068-4020 tag 3068
+config vlan 3068-4020 add tagged 12,26
+create vlan 3069-4020 tag 3069
+config vlan 3069-4020 add tagged 12,26
+create vlan 3070-4020 tag 3070
+config vlan 3070-4020 add tagged 16,26
+create vlan 3071-4020 tag 3071
+config vlan 3071-4020 add tagged 5,26
+create vlan 3072-4020 tag 3072
+config vlan 3072-4020 add tagged 5,26
+create vlan 3073-4020 tag 3073
+config vlan 3073-4020 add tagged 5,26
+create vlan 3074-4020 tag 3074
+config vlan 3074-4020 add tagged 5,26
+create vlan 3075-4020 tag 3075
+config vlan 3075-4020 add tagged 5,26
+create vlan 3076-4020 tag 3076
+config vlan 3076-4020 add tagged 5,26
+create vlan 3077-4020 tag 3077
+config vlan 3077-4020 add tagged 5,26
+create vlan 3078-4020 tag 3078
+config vlan 3078-4020 add tagged 5,26
+create vlan 3079-4020 tag 3079
+config vlan 3079-4020 add tagged 5,26
+create vlan 3080-4020 tag 3080
+config vlan 3080-4020 add tagged 5,26
+create vlan 3081-4020 tag 3081
+config vlan 3081-4020 add tagged 5,26
+create vlan 3082-4020 tag 3082
+config vlan 3082-4020 add tagged 12,26
+create vlan 3083-4020 tag 3083
+config vlan 3083-4020 add tagged 12,26
+create vlan 3084-4020 tag 3084
+config vlan 3084-4020 add tagged 12,26
+create vlan 3085-4020 tag 3085
+config vlan 3085-4020 add tagged 12,26
+create vlan 3086-4020 tag 3086
+config vlan 3086-4020 add tagged 12,26
+create vlan 3087-4020 tag 3087
+config vlan 3087-4020 add tagged 12,26
+create vlan 3088-4020 tag 3088
+config vlan 3088-4020 add tagged 12,26
+create vlan 3089-4020 tag 3089
+config vlan 3089-4020 add tagged 12,26
+create vlan 3090-4020 tag 3090
+config vlan 3090-4020 add tagged 12,26
+create vlan 3091-4020 tag 3091
+config vlan 3091-4020 add tagged 12,26
+create vlan 3092-4020 tag 3092
+config vlan 3092-4020 add tagged 12,26
+create vlan 3093-4020 tag 3093
+config vlan 3093-4020 add tagged 12,26
+create vlan 3094-4020 tag 3094
+config vlan 3094-4020 add tagged 12,26
+create vlan 3095-4020 tag 3095
+config vlan 3095-4020 add tagged 12,26
+create vlan 3096-4020 tag 3096
+config vlan 3096-4020 add tagged 12,26
+create vlan 3097-4020 tag 3097
+config vlan 3097-4020 add tagged 12,26
+create vlan 3098-4020 tag 3098
+config vlan 3098-4020 add tagged 12,26
+create vlan 3099-4020 tag 3099
+config vlan 3099-4020 add tagged 12,26
+create vlan 3100-4020 tag 3100
+config vlan 3100-4020 add tagged 12,26
+create vlan 3101-4020 tag 3101
+config vlan 3101-4020 add tagged 12,26
+create vlan 3102-4020 tag 3102
+config vlan 3102-4020 add tagged 12,26
+create vlan 3103-4020 tag 3103
+config vlan 3103-4020 add tagged 12,26
+create vlan 3104-4020 tag 3104
+config vlan 3104-4020 add tagged 12,26
+create vlan 3209-4020 tag 3209
+config vlan 3209-4020 add tagged 12,26
+create vlan 3302-4020 tag 3302
+config vlan 3302-4020 add tagged 12,26
+create vlan 3311-4020 tag 3311
+config vlan 3311-4020 add tagged 12,26
+create vlan 3370-4020 tag 3370
+config vlan 3370-4020 add tagged 12,26
+create vlan 3389-4020 tag 3389
+config vlan 3389-4020 add tagged 5,26
+create vlan 3709-3681 tag 3709
+config vlan 3709-3681 add tagged 12,26
+create vlan 3710-3681 tag 3710
+config vlan 3710-3681 add tagged 5,26
+create vlan 3711-3681 tag 3711
+config vlan 3711-3681 add tagged 5,26
+disable gvrp
+config gvrp 1,8 state disable ingress_checking enable acceptable_frame admit_all pvid 35
+config gvrp 2,4-7,9-10,12-23,25-28 state disable ingress_checking enable acceptable_frame admit_all pvid 1
+config gvrp 3 state disable ingress_checking enable acceptable_frame admit_all pvid 3056
+config gvrp 11 state disable ingress_checking enable acceptable_frame admit_all pvid 895
+config gvrp 24 state disable ingress_checking enable acceptable_frame admit_all pvid 301
