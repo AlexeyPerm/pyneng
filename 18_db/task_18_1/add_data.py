@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 18.1
 
 add_data.py
@@ -18,10 +18,12 @@ add_data.py
 Код должен быть разбит на функции.
 Какие именно функции и как разделить код, надо решить самостоятельно.
 Часть кода может быть глобальной.
-'''
+"""
 
 import glob
+from create_db import create_db
 
 db_filename = 'dhcp_snooping.db'
 dhcp_snoop_files = glob.glob('sw*_dhcp_snooping.txt')
-#print(dhcp_snoop_files)
+
+
