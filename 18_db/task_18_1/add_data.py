@@ -20,19 +20,66 @@ add_data.py
 Какие именно функции и как разделить код, надо решить самостоятельно.
 Часть кода может быть глобальной.
 """
-import yaml
-import glob
+
 import sqlite3
+from create_db import create_db
 
-db_filename = 'dhcp_snooping.db'
-dhcp_snoop_files = glob.glob('sw*_dhcp_snooping.txt')
 
-with open('switches.yml') as f:
-    template = yaml.load(f)
+def add_sw_data():
+    """
+    Добавляет в базу switches данные об имени и местоположении устройства
+    Используются локальный переменные и импорт, поэтому в функцию
+    не передаются никакие параметры и аргументы.
+    """
 
-data = []
-for k in template['switches'].items():
-    data.append(k)
+    import yaml
+    con = sqlite3.connect('dhcp_snooping.db')
+    data = []
 
-connection = sqlite3.connect('dhcp_snooping.db').cursor()
-connection.executemany(db_filename, data)
+    with open('switches.yml') as f:
+        template = yaml.load(f)
+    for k in template['switches'].items():
+        data.append(k)
+
+    try:
+        with con:
+            query = 'INSERT into switches values (?, ?)'
+            con.executemany(query, data)
+
+    except sqlite3.IntegrityError as e:
+        print('Error occured: ', e)
+    con.close()
+
+
+def add_dhcp_data():
+    import re
+    import glob
+
+    dhcp_snoop_files = glob.glob('sw*_dhcp_snooping.txt')
+    con = sqlite3.connect('dhcp_snooping.db')
+    result = []
+
+    for file_name in dhcp_snoop_files:
+        hostname = file_name.split('_')[0]
+
+        with open(file_name) as data:
+            for line in data:
+                regex = re.compile(r'(\S+) +(\S+) +\d+ +\S+ +(\d+) +(\S+)')
+                match = regex.search(line)
+                if match:
+                    mac, ip, vlan, interface = match.groups()
+                    result.append((mac, ip, vlan, interface, hostname))
+
+    for row in result:
+        try:
+            while con:
+                query = 'INSERT into dhcp values (?, ?, ?, ?, ?)'
+                con.executemany(query, row)
+        except sqlite3.IntegrityError as e:
+            print('Error occured: ', e)
+
+
+if __name__ == '__main__':
+    create_db()
+    add_sw_data()
+    add_dhcp_data()
