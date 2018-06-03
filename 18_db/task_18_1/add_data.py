@@ -34,6 +34,5 @@ data = []
 for k in template['switches'].items():
     data.append(k)
 
-connection = sqlite3.connect('dhcp_snooping.db')
-cursor = connection.cursor()
-cursor.executemany(db_filename, data)
+connection = sqlite3.connect('dhcp_snooping.db').cursor()
+connection.executemany(db_filename, data)
