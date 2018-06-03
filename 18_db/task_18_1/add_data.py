@@ -13,17 +13,27 @@ add_data.py
 * информация на основании вывода sh ip dhcp snooping binding добавляется в таблицу dhcp
  * вывод с трёх коммутаторов:
    * файлы sw1_dhcp_snooping.txt, sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt
- * так как таблица dhcp изменилась, и в ней теперь присутствует поле switch, его нужно также заполнять. Имя коммутатора определяется по имени файла с данными
+ * так как таблица dhcp изменилась, и в ней теперь присутствует поле switch, его нужно также заполнять. Имя коммутатора
+ определяется по имени файла с данными
 
 Код должен быть разбит на функции.
 Какие именно функции и как разделить код, надо решить самостоятельно.
 Часть кода может быть глобальной.
 """
-
+import yaml
 import glob
-from create_db import create_db
+import sqlite3
 
 db_filename = 'dhcp_snooping.db'
 dhcp_snoop_files = glob.glob('sw*_dhcp_snooping.txt')
 
+with open('switches.yml') as f:
+    template = yaml.load(f)
 
+data = []
+for k in template['switches'].items():
+    data.append(k)
+
+connection = sqlite3.connect('dhcp_snooping.db')
+cursor = connection.cursor()
+cursor.executemany(db_filename, data)
